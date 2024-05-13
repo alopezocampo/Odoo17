@@ -88,8 +88,7 @@
                         </t>
                         <t t-elif="o.partner_shipping_id and (o.partner_shipping_id == o.partner_id)">
                             <div class="col-12" name="address_same_as_shipping">
-                                <!-- hola -->
-                                <address class="mb-0" t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                                <address class="mb-0" style="font-size: 24px !important;" t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
                                 <div t-if="o.partner_id.vat" id="partner_vat_address_same_as_shipping">
                                     <t t-if="o.company_id.account_fiscal_country_id.vat_label" t-out="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
                                     <t t-else="">Tax ID</t>: <span t-field="o.partner_id.vat"/>
@@ -112,7 +111,7 @@
                     </div>
                     <div class="mt-5 clearfix">
                         <div class="page mb-4">
-                            <h2>
+                            <h2 style="font-size:24px">
                                 <span t-if="not proforma"/>
                                 <span t-else="">PROFORMA</span>
                                 <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">NO.</span>
@@ -348,7 +347,13 @@
                                 </div>
                             </div>
                             <div class="text-center text-muted mb-3">
-                                <div t-field="company.report_footer">Company Report Footer</div>
+                                <ul class="list-unstyled" style="font-size:16px !important">
+                                    <li>Todo trabajo requiere pago anticipado</li>
+                                    <li>Una vez entregada la prenda tiene 10 días para cualquier aclaración</li>
+                                    <li>Después de 30 días no nos hacemos responsables por prendas olvidadas</li>
+                                    <li>Por higiene no se aceptan prendas sucias</li>
+                                </ul>
+                                <!-- <div t-field="company.report_footer">Company Report Footer</div> -->
                             </div>
                             <hr />
                         </div>
@@ -369,5 +374,19 @@
         <!-- <field name="binding_model_id" ref="school_student.model_school_student"/> -->
         <field name="paperformat_id" ref="sewing.paperformat_invoice_ticket" />
         <field name="binding_type">report</field>
+    </record>
+
+    <record id="sewing_account_view_move_form" model="ir.ui.view">
+        <field name="name">sewing.account.view.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//header" position="inside">
+                <button name="button_print_ticket" icon="fa-print" class="oe_highlight" string="Imprimir ticket" type="object" help="Imprimir ticket" invisible="state != 'posted'" />
+            </xpath>
+            <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                <field name="delivery_date" invisible="not show_delivery_date" readonly="state != 'draft'"/>
+            </xpath>
+        </field>
     </record>
 </odoo>
