@@ -385,7 +385,7 @@
                 <button name="button_print_ticket" icon="fa-print" class="oe_highlight" string="Imprimir ticket" type="object" help="Imprimir ticket" invisible="state != 'posted'" />
             </xpath>
             <xpath expr="//field[@name='partner_shipping_id']" position="after">
-                <field name="delivery_date" invisible="not show_delivery_date" readonly="state != 'draft'"/>
+                <field name="delivery_date" readonly="state != 'draft'"/>
             </xpath>
         </field>
     </record>
