@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="salesperson_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">salesperson.report.wizard.form</field>
+        <field name="model">salesperson.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Salespersons Payment Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="status"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                        <field name="company_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <field name="salesperson_ids" nolabel="1"
+                       groups="bi_salesperson_payment_reports.bi_salesperson_in_payment_reports_group">
+                    <tree editable="bottom">
+                        <field name="name"/>
+                    </tree>
+                </field>
+                <footer>
+                    <button name="print_in_pdf_report" string="Print PDF" type="object" class="btn-primary btn"/>
+                    <button name="print_in_xls_report" string="Print In XLS" type="object" class="btn-primary btn"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="salesperson_report_wizard_action" model="ir.actions.act_window">
+        <field name="name">Salespersons Payment Report</field>
+        <field name='type'>ir.actions.act_window</field>
+        <field name="res_model">salesperson.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="salesperson_report_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="salesperson_payment_report_menu" name="Payments Report" action="salesperson_report_wizard_action"
+              parent="account.menu_finance" sequence="101"
+              groups="bi_salesperson_payment_reports.bi_salesperson_payment_reports_group"/>
+
+</odoo>

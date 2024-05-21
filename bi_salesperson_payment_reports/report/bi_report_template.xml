@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="salesperson_payment_report">
+        <t t-call="web.external_layout">
+            <br/>
+            <center><div class="text-center"><h2><b>Invoice Payment Report</b></h2></div></center>
+            <center><div class="text-center"><b><t t-esc="docs.start_date"/> To <t t-esc="docs.end_date"/></b></div></center>
+            <center><div class="text-center"><b>Company :<t t-esc="key"/></b></div></center>
+            <br/>
+
+            <t t-foreach="comp[0].keys()" t-as="sn">
+                <t t-set="sp" t-value="comp[0][sn]"/>
+                <center><div class="text-center"><b>Salesperson: <t t-esc="sn"/></b></div></center>
+                <table class="table">
+                    <thead>
+                        <th><b>Invoice</b></th>
+                        <th><b>Invoice Date</b></th>
+                        <th><b>Salesperson</b></th>
+                        <th><b>Customer</b></th>
+                        <t t-foreach="comp[1].keys()" t-as="jn">
+                            <th><b><t t-esc="jn"/></b></th>
+                        </t>
+                        <th><b>Total</b></th>
+                    </thead>
+                    <tbody>
+                        <t t-set="bottom_total" t-value="0"/>
+                        <t t-foreach="sp[0]" t-as="l">
+                            <tr>
+                                <td><t t-esc="l[0]"/></td>
+                                <td><t t-esc="l[1]"/></td>
+                                <td><t t-esc="l[2]"/></td>
+                                <td><t t-esc="l[3]"/></td>
+                                <t t-foreach="l[4:]" t-as="ttt">
+                                    <td><t t-esc="'%.2f'%(ttt)"/></td>
+                                </t>
+                                <td>
+                                    <t t-esc="'%.2f'%(sum(i for i in l[4:]))"/>
+                                    <t t-set="bottom_total" t-value="bottom_total + sum(i for i in l[4:])"/>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr t-if="len(sp[0]) != 0">
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
+                            <t t-foreach="sp[1].keys()" t-as="jn">
+                                <td><t t-esc="'%.2f'%(sp[1][jn])"/></td>
+                            </t>
+                            <td><t t-esc="'%.2f'%(bottom_total)"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+            </t>
+
+            <h2><b>Payment Methods</b></h2>
+            <table class="table text-center">
+                <thead>
+                    <th><b>Name</b></th>
+                    <th><b>Total</b></th>
+                </thead>
+                <tbody>
+                    <t t-foreach="comp[1].keys()" t-as="tt">
+                        <tr>
+                            <td><t t-esc="tt"/></td>
+                            <td><t t-esc="'%.2f'%(comp[1][tt])"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+            <br/>
+        </t>
+    </template>
+
+
+    <template id="salesperson_payment_reports">
+        <t t-call="web.html_container">
+            <t t-set="main_data" t-value="docs.get_report_data()"/>
+            <t t-foreach="main_data.keys()" t-as="key">
+                <t t-set="comp" t-value="main_data[key]"/>
+                <t t-call="bi_salesperson_payment_reports.salesperson_payment_report"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>
