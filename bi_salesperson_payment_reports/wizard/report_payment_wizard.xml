@@ -31,7 +31,7 @@
     </record>
 
     <record id="salesperson_report_wizard_action" model="ir.actions.act_window">
-        <field name="name">Salespersons Payment Report</field>
+        <field name="name">Reporte de Ventas</field>
         <field name='type'>ir.actions.act_window</field>
         <field name="res_model">salesperson.report.wizard</field>
         <field name="view_mode">form</field>
