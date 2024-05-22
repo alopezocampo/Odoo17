@@ -4,7 +4,7 @@
         <field name="name">salesperson.report.wizard.form</field>
         <field name="model">salesperson.report.wizard</field>
         <field name="arch" type="xml">
-            <form string="Salespersons Payment Report">
+            <form string="Reporte de Ventas">
                 <group>
                     <group>
                         <field name="start_date"/>
@@ -22,9 +22,9 @@
                     </tree>
                 </field>
                 <footer>
-                    <button name="print_in_pdf_report" string="Print PDF" type="object" class="btn-primary btn"/>
-                    <button name="print_in_xls_report" string="Print In XLS" type="object" class="btn-primary btn"/>
-                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    <button name="print_in_pdf_report" string="Descargar PDF" type="object" class="btn-primary btn"/>
+                    <button name="print_in_xls_report" string="Descargar En XLS" type="object" class="btn-primary btn"/>
+                    <button string="Cerrar" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>
@@ -39,7 +39,7 @@
         <field name="target">new</field>
     </record>
 
-    <menuitem id="salesperson_payment_report_menu" name="Payments Report" action="salesperson_report_wizard_action"
+    <menuitem id="salesperson_payment_report_menu" name="Reporte de Ventas" action="salesperson_report_wizard_action"
               parent="account.menu_finance" sequence="101"
               groups="bi_salesperson_payment_reports.bi_salesperson_payment_reports_group"/>
 

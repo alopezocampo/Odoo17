@@ -17,11 +17,11 @@ class SalespersonReportWizard(models.TransientModel):
 	_description = "Salesperson Report Wizard"
 
 
-	start_date = fields.Date(string="Start Date", required=True);
-	end_date = fields.Date(string="End Date", required=True);
-	status = fields.Selection([('draft','Draft'),('post','Post'),('all','All')], string="States", default="all");
-	salesperson_ids = fields.Many2many("res.users", "salesperson_report_wizard_ref", string="Salesperson");
-	company_ids = fields.Many2many("res.company", "salesperson_report_company_wizard_ref", string="Companies");
+	start_date = fields.Date(string="Fecha Inicial", required=True);
+	end_date = fields.Date(string="Fecha Final", required=True);
+	status = fields.Selection([('draft','Borrador'),('post','Publicado'),('all','Todos')], string="Estado", default="all");
+	salesperson_ids = fields.Many2many("res.users", "salesperson_report_wizard_ref", string="Vendedor");
+	company_ids = fields.Many2many("res.company", "salesperson_report_company_wizard_ref", string="Compañia");
 	data = fields.Binary(string="Files");
 	file_name = fields.Char(string="Filename");
 
