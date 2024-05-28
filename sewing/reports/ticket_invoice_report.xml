@@ -68,9 +68,7 @@
                     <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
                     <div class="row mt-3">
                         <div class="col-12" >
-                            <t t-set="address">
-                                <address class="mb-0" style="font-size: 24px !important;" t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
-                            </t>
+                            <address class="mb-0" style="font-size: 24px !important;" t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
                         </div>
                     </div>
                     <div class="mt-5 clearfix">
