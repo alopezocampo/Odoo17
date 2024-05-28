@@ -1,6 +1,6 @@
 {
     'name': 'Sewing',
-    'version': '0.1.42',
+    'version': '1.1.43',
     'summary': 'Módulo de control de requerimientos de costureria',
     'author': 'Quality Systems',
     'website': 'https://www.qualitysystems.com',
